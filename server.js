@@ -5,7 +5,7 @@ import authRouter from './src/routes/auth.routes.js'
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
+app.use(express.json());
 dotenv.config();
 
 app.use(secureRequest);

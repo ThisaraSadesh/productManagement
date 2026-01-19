@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export const connectDB = () => {
+export const connectDB = async() => {
   try {
     const isConnected = mongoose.connect(process.env.MONGODB_URI);
     if (isConnected) {
@@ -8,5 +8,6 @@ export const connectDB = () => {
     }
   } catch (error) {
     console.error(error);
+    return;
   }
 };
