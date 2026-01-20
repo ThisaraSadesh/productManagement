@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin123
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    container_name: auth-service
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - MONGODB_URI=mongodb://admin:admin123@mongodb:27017/authDB?authSource=admin
+      - TOKEN_HEADER_KEY=authorization
+      - JWT_SECRET_KEY=4778ccb58045144566ddae32bec2aafb6136f24a1fcc79504c5a389471ce4d93bfd75cabb8ced9d3f8c9689f41deaa40559e4bfae1ff5e82bb43d476e18ac693
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
+  product-service:
+    build:
+      context: ./product-service
+      dockerfile: Dockerfile
+    container_name: product-service
+    restart: always
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - MONGODB_URI=mongodb://admin:admin123@mongodb:27017/productDB?authSource=admin
+    depends_on:
+      - mongodb
+    networks:
+      - app-network
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - AUTH_SERVICE_URL=http://auth-service:3001
+      - PRODUCT_SERVICE_URL=http://product-service:3002
+      - TOKEN_HEADER_KEY=authorization
+      - JWT_SECRET_KEY=4778ccb58045144566ddae32bec2aafb6136f24a1fcc79504c5a389471ce4d93bfd75cabb8ced9d3f8c9689f41deaa40559e4bfae1ff5e82bb43d476e18ac693
+    depends_on:
+      - auth-service
+      - product-service
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
+    driver: local

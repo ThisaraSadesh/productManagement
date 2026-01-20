@@ -9,13 +9,11 @@ export const registerUser = async (req, res) => {
   const body = req.body;
   const hashedPassword = await bcrypt.hash(body.password, 10);
 
-  // Create company first
   const companyResult = await companiesModel.create({
     name: body.company_name,
   });
 
   if (companyResult) {
-    // Create user with the company_id
     const result = await usersModel.create({
       name: body.name,
       company_id: companyResult._id,

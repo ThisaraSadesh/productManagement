@@ -4,7 +4,6 @@ import axios from "axios";
 const router = express.Router();
 const PRODUCT_SERVICE_URL = process.env.PRODUCT_SERVICE_URL || "http://localhost:3002";
 
-// Update stock - forward to product service
 router.post("/update", async (req, res) => {
   try {
     const response = await axios.post(`${PRODUCT_SERVICE_URL}/stock/update`, req.body, {

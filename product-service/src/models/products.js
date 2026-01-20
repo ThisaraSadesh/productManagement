@@ -11,7 +11,6 @@ const productSchema = new Schema(
   { timestamps: true },
 );
 
-// Auto-increment id before saving
 productSchema.pre('save', async function() {
   if (!this.id) {
     const maxProduct = await this.constructor.findOne({}, { id: 1 }).sort({ id: -1 }).limit(1);

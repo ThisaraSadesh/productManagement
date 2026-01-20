@@ -4,7 +4,6 @@ import axios from "axios";
 const router = express.Router();
 const AUTH_SERVICE_URL = process.env.AUTH_SERVICE_URL || "http://localhost:3001";
 
-// Register route - forward to auth service
 router.post("/register", async (req, res) => {
   try {
     const response = await axios.post(`${AUTH_SERVICE_URL}/auth/register`, req.body);
@@ -16,7 +15,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Login route - forward to auth service
 router.post("/login", async (req, res) => {
   try {
     const response = await axios.post(`${AUTH_SERVICE_URL}/auth/login`, req.body);

@@ -13,7 +13,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(authenticate);
 
-// Route all requests to respective microservices
 app.use("/auth", authRouter);
 app.use("/products", productRouter);
 app.use("/stock", stockRouter);
