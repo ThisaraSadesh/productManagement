@@ -1,21 +1,28 @@
 {
   "name": "backend_developer_intern_technical_assignment_endless_raven",
   "version": "1.0.0",
-  "description": "",
-  "license": "ISC",
-  "author": "",
-  "type": "module",
+  "description": "This project has been restructured into a microservices architecture with the following components:",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:auth": "node auth-service/src/index.js",
+    "start:product": "node product-service/src/index.js",
+    "start:gateway": "node api-gateway/src/index.js",
+    "start:all": "concurrently \"npm run start:auth\" \"npm run start:product\" \"npm run start:gateway\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThisaraSadesh/productManagement.git"
   },
   "keywords": [],
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "bcryptjs": "^3.0.3",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.1.4"
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ThisaraSadesh/productManagement/issues"
+  },
+  "homepage": "https://github.com/ThisaraSadesh/productManagement#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }
