@@ -23,22 +23,54 @@ export const addProduct = async (req, res) => {
 };
 
 export const fetchProduct = async (req, res) => {
-  await connectDB();
-  const body = req.body;
+   await connectDB();
+  try {
+    const { _id, page = 1, limit = 10, search = "" } = req.query;
+    console.log("PRINTING QUERY", req.query);
 
-  const result = body._id
-    ? await productModel
-        .findOne({
-          _id: body._id,
-        })
-        .lean()
-    : await productModel.find({}).lean();
-  if (result !== null) {
-    res
-      .status(200)
-      .json({ message: "Product Found Successfully", data: result });
-  } else {
-    res.status(401).json({ message: "Product Not Found" });
+    if (_id) {
+      const product = await productModel.findById(_id).lean();
+
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+
+      return res.status(200).json({
+        message: "Product found successfully",
+        data: product,
+      });
+    }
+  
+
+    const pageNumber = parseInt(page);
+    const limitNumber = parseInt(limit);
+    const skip = (pageNumber - 1) * limitNumber;
+
+    const query = {
+      name: { $regex: search, $options: "i" },
+    };
+
+    const products = await productModel
+      .find(query)
+      .skip(skip)
+      .limit(limitNumber)
+      .lean();
+
+    const total = await productModel.countDocuments(query);
+
+    res.status(200).json({
+      message: "Products fetched successfully",
+      pagination: {
+        page: pageNumber,
+        limit: limitNumber,
+        total,
+        totalPages: Math.ceil(total / limitNumber),
+      },
+      data: products,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
@@ -65,11 +97,15 @@ export const updateProduct = async (req, res) => {
         productId: result._id,
         stockBefore: result.stock,
         stockAfter: body.stock,
-        changeAmount: Math.abs(body.stock - result.stock)
+        changeAmount: Math.abs(body.stock - result.stock),
       });
 
       if (isRecorded) {
-        res.status(200).json({ message: "Product Updated and Stock Log Recorded Successfully" });
+        res
+          .status(200)
+          .json({
+            message: "Product Updated and Stock Log Recorded Successfully",
+          });
       }
     } else {
       res.status(200).json({ message: "Product Updated Successfully" });

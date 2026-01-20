@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const response = await axios.get(`${PRODUCT_SERVICE_URL}/products`, {
       data: req.body,
       headers: {
-        authorization: req.header("authorization")
+        authorization: req.header("Authorization")
       }
     });
     res.status(response.status).json(response.data);
@@ -24,7 +24,7 @@ router.post("/", async (req, res) => {
   try {
     const response = await axios.post(`${PRODUCT_SERVICE_URL}/products`, req.body, {
       headers: {
-        authorization: req.header("authorization")
+        authorization: req.header("Authorization")
       }
     });
     res.status(response.status).json(response.data);
@@ -39,7 +39,7 @@ router.post("/update", async (req, res) => {
   try {
     const response = await axios.post(`${PRODUCT_SERVICE_URL}/products/update`, req.body, {
       headers: {
-        authorization: req.header("authorization")
+        authorization: req.header("Authorization")
       }
     });
     res.status(response.status).json(response.data);

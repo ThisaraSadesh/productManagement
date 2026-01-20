@@ -8,7 +8,7 @@ router.post("/update", async (req, res) => {
   try {
     const response = await axios.post(`${PRODUCT_SERVICE_URL}/stock/update`, req.body, {
       headers: {
-        authorization: req.header("authorization")
+        authorization: req.header("Authorization")
       }
     });
     res.status(response.status).json(response.data);

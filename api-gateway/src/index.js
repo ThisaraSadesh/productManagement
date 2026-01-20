@@ -4,8 +4,12 @@ import authenticate from "./middleware/securityMiddleware.js";
 import authRouter from "./routes/auth.routes.js";
 import productRouter from "./routes/products.routes.js";
 import stockRouter from "./routes/stock.routes.js";
+import path from "path";
 
-dotenv.config();
+dotenv.config({
+  path: path.resolve(process.cwd(), "api-gateway/.env")
+});
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;

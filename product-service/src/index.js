@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import productRouter from "./routes/products.routes.js";
 import stockRouter from "./routes/stock.routes.js";
 import path from "path";
+import jwt from "jsonwebtoken"; 
 
 dotenv.config({
   path: path.resolve(process.cwd(), "product-service/.env")
@@ -14,7 +15,7 @@ const PORT = process.env.PORT || 3002;
 app.use(express.json());
 
 const authenticate = (req, res, next) => {
-  const tokenHeaderKey = process.env.TOKEN_HEADER_KEY || "authorization";
+  const tokenHeaderKey = process.env.TOKEN_HEADER_KEY || "Authorization";
   const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
   try {
@@ -36,7 +37,7 @@ const authenticate = (req, res, next) => {
 };
 
 
-app.use("/products",authenticate, productRouter);
+app.use("/products", productRouter);
 app.use("/stock", authenticate, stockRouter);
 
 app.listen(PORT, () => {

@@ -5,7 +5,7 @@ const authenticate = (req, res, next) => {
     return next();
   }
 
-  const tokenHeaderKey = process.env.TOKEN_HEADER_KEY || "authorization";
+  const tokenHeaderKey = process.env.TOKEN_HEADER_KEY || "Authorization";
   const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
   try {
@@ -21,12 +21,16 @@ const authenticate = (req, res, next) => {
     } else {
       return res
         .status(401)
-        .json({ message: "Authentication Failed - Invalid Token" });
+        .json({ message: "Authentication Failed - Token verification returned false" });
     }
   } catch (error) {
+    console.error("JWT Verification Error:", error.message);
     return res
       .status(401)
-      .json({ message: "Authentication Failed - Invalid Token" });
+      .json({ 
+        message: "Authentication Failed - Token is invalid or expired",
+        error: error.message 
+      });
   }
 };
 
