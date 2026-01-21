@@ -86,7 +86,7 @@ export const updateProduct = async (req, res) => {
 
   const result = await productModel.findOneAndUpdate(
     {
-      _id: body._id,
+      id: body.id,
     },
     updateData,
   );
@@ -94,7 +94,7 @@ export const updateProduct = async (req, res) => {
   if (result) {
     if (body.stock !== undefined && body.stock !== result.stock) {
       const isRecorded = await stockLogModel.create({
-        productId: result._id,
+        productId: result.id,
         stockBefore: result.stock,
         stockAfter: body.stock,
         changeAmount: Math.abs(body.stock - result.stock),
