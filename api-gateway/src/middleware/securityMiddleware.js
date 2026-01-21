@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const authenticate = (req, res, next) => {
-  if (req.path === "/auth/login" || req.path === "/auth/register") {
+  if (req.path === "/auth/login" || req.path === "/auth/register" || req.path === "/auth/health") {
     return next();
   }
 

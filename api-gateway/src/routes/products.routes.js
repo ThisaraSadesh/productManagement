@@ -50,4 +50,21 @@ router.post("/update", async (req, res) => {
   }
 });
 
+
+router.delete("/delete", async (req, res) => {
+  try {
+    const response = await axios.delete(`${PRODUCT_SERVICE_URL}/products/delete`, {
+      data: req.body,
+      headers: {
+        authorization: req.header("Authorization")
+      }
+    });
+    res.status(response.status).json(response.data);
+  } catch (error) {
+    res.status(error.response?.status || 500).json(
+      error.response?.data || { message: "Product service error" }
+    );
+  }
+});
+
 export default router;

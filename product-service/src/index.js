@@ -37,7 +37,7 @@ const authenticate = (req, res, next) => {
 };
 
 
-app.use("/products", productRouter);
+app.use("/products",authenticate, productRouter);
 app.use("/stock", authenticate, stockRouter);
 
 app.listen(PORT, () => {

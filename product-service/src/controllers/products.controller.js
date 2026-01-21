@@ -23,7 +23,7 @@ export const addProduct = async (req, res) => {
 };
 
 export const fetchProduct = async (req, res) => {
-   await connectDB();
+  await connectDB();
   try {
     const { _id, page = 1, limit = 10, search = "" } = req.query;
     console.log("PRINTING QUERY", req.query);
@@ -40,7 +40,6 @@ export const fetchProduct = async (req, res) => {
         data: product,
       });
     }
-  
 
     const pageNumber = parseInt(page);
     const limitNumber = parseInt(limit);
@@ -101,16 +100,27 @@ export const updateProduct = async (req, res) => {
       });
 
       if (isRecorded) {
-        res
-          .status(200)
-          .json({
-            message: "Product Updated and Stock Log Recorded Successfully",
-          });
+        res.status(200).json({
+          message: "Product Updated and Stock Log Recorded Successfully",
+        });
       }
     } else {
       res.status(200).json({ message: "Product Updated Successfully" });
     }
   } else {
     res.status(401).json({ message: "Product Update Failed" });
+  }
+};
+
+
+export const deleteProduct = async (req, res) => {
+  await connectDB();
+  const { id } = req.body;
+  const result = await productModel.findOneAndDelete({ id: id });
+
+  if (result) {
+    res.status(200).json({ message: "Product Deleted Successfully" });
+  } else {
+    res.status(401).json({ message: "Product Deletion Failed" });
   }
 };

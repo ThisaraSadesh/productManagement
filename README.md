@@ -64,6 +64,12 @@ cd api-gateway
 npm start
 ```
 
+
+or you can run all three services at same time using this command:
+```bash
+npm run start:all
+```
+
 ## API Endpoints
 
 All requests go through the API Gateway at `http://localhost:3000`
@@ -71,11 +77,14 @@ All requests go through the API Gateway at `http://localhost:3000`
 ### Authentication
 - `POST /auth/register` - Register a new user
 - `POST /auth/login` - Login and get JWT token
+- `GET  /auth/health` - Checks Health Status of the auth API
 
 ### Products (Requires Authentication)
 - `GET /products` - Fetch all products
 - `POST /products` - Add a new product
 - `POST /products/update` - Update a product
+- `DELETE /products/delete` - Delete a product
+- `GET  /products/health` - Checks Health Status of the products API
 
 ### Stock (Requires Authentication)
 - `POST /stock/update` - Update product stock

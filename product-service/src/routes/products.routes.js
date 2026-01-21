@@ -3,6 +3,7 @@ import {
   addProduct,
   fetchProduct,
   updateProduct,
+  deleteProduct
 } from "../controllers/products.controller.js";
 
 const router = express.Router();
@@ -17,4 +18,6 @@ router.get("/health", (req, res) => {
     timestamp: new Date(),
   });
 });
+
+router.delete("/delete", deleteProduct); 
 export default router;
