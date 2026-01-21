@@ -1,0 +1,109 @@
+{
+  "info": {
+    "_postman_id": "4372d5ed-a1ae-408e-ac04-92b10808060f",
+    "name": "Auth",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register",
+      "id": "ce16775e-2d15-4ad6-8ce3-de59443843ef",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\": \"heshandesh@gamil.com\",\r\n    \"password\": \"1234\",\r\n    \"roleId\": \"67e134afe278280f7f41ffe9\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "auth",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login",
+      "id": "87ff253f-e7ee-4d4c-8b59-9b41ca32bfb8",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"thisara sadedsh\",\r\n  \"password\": \"2002122#Tt\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Health Check API",
+      "id": "0fb12e21-ddbb-4c71-ab03-a928cd21d95c",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjk2ZjE4ZDY5NWY1NmQ3Mjk5ZGEyMDk0IiwiY29tcGFueV9pZCI6IjY5NmYxOGQ0OTVmNTZkNzI5OWRhMjA4ZiIsImlhdCI6MTc2ODk2NjQwNH0.VbW_yVTtIJJ47hxqC6zjpPSD0rO9lcx8TM_RFtT7--U",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"thisara sadedsh\",\r\n  \"password\": \"2002122#Tt\"\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3001/auth/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3001",
+          "path": [
+            "auth",
+            "health"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

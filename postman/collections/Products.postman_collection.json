@@ -1,0 +1,136 @@
+{
+  "info": {
+    "_postman_id": "bf2eaabc-3557-472a-b186-b06dbeade56e",
+    "name": "Products",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Products",
+      "id": "eeebace4-84b3-4289-ab84-0b935bb3ec76",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjk2ZjkxZjI2MDg0MTlmMzE5MDY3ODM3IiwiY29tcGFueV9pZCI6IjY5NmY5MWYyNjA4NDE5ZjMxOTA2NzgzNCIsImlhdCI6MTc2ODkxOTYxM30.vCpGVTUrlP_ldupw9L8LtGNzltdQN7foDG8X4kXhV6g",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{   \"name\": \"Product B\",\r\n    \"price\": 150,\r\n    \"stock\": 10\r\n    \r\n    }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Products",
+      "id": "1c504beb-4156-401c-b0a0-15916f38767b",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjk2ZjkxZjI2MDg0MTlmMzE5MDY3ODM3IiwiY29tcGFueV9pZCI6IjY5NmY5MWYyNjA4NDE5ZjMxOTA2NzgzNCIsImlhdCI6MTc2ODkxOTYxM30.vCpGVTUrlP_ldupw9L8LtGNzltdQN7foDG8X4kXhV6g",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:3000/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Products",
+      "id": "2a10505f-64a3-41a4-911a-49de8b39315c",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjk2ZjE4ZDY5NWY1NmQ3Mjk5ZGEyMDk0IiwiY29tcGFueV9pZCI6IjY5NmYxOGQ0OTVmNTZkNzI5OWRhMjA4ZiIsImlhdCI6MTc2ODk2NjQwNH0.VbW_yVTtIJJ47hxqC6zjpPSD0rO9lcx8TM_RFtT7--U",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"id\": 1,\r\n    \"stock\": 35\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/stock/update",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "stock",
+            "update"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Health Check API",
+      "id": "eb3644fe-e65b-43ac-aa88-d32a86eed95b",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3002/products/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3002",
+          "path": [
+            "products",
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Product",
+      "id": "a5c88f50-a159-4880-812b-93e43355beb5",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}
